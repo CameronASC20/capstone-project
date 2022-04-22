@@ -5,11 +5,10 @@ User Stories:
 - User will be able to create account
 - User will be able to login and logout
 - User will be able to see index of basketball players
-- User will be able to make a team of basketball players
-- User will be able to edit their team
-- User will be able to delete their team
-- User will be able to comment on basketball games
-- User will be able to see real time basketball games
+- User will be able to see stats of specific player
+- User will be able to favorite a player
+- User will be able to comment on a players stats
+- User will be able to delete from their favorites
 
 
 Wireframe:
