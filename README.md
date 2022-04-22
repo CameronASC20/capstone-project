@@ -22,7 +22,7 @@ Wireframe:
 ERD:
 
 
-![Capstone](https://user-images.githubusercontent.com/68292255/164779856-d4f3677f-bc47-40f4-957b-25780ab5e8b4.jpeg)
+![Capstone](https://user-images.githubusercontent.com/68292255/164782389-70ea3299-50c5-40a9-acc1-5f6c6cd65fa1.jpeg)
 
 
 
