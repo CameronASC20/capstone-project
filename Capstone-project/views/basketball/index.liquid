@@ -8,10 +8,9 @@
             <h5 class="card-header">{{ player.first_name }} {{ player.last_name }}</h5>
             <div class="card-body">
                 <p class="card-text">
-                    {{ player.height_feet }} {{ player.height_inches }}
-                    {{ player.weight_pounds }}
-                    {{ player.team.full_name }}
-                    {{ player.team.conference }}
+                    Team: {{ player.team.full_name }}
+                    
+                    Conference: {{ player.team.conference }}
                 </p>
                 <a href="/basketball/{{ player.id }}" class="btn btn-info">
                     View {{ player.first_name }} {{ player.last_name }}

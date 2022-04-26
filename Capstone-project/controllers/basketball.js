@@ -19,9 +19,9 @@ router.get('/', (req, res) => {
 			// res.send(responseData)
 		})
 		.then((jsonData) => {
-			console.log(jsonData)
+			console.log('response data', jsonData.data)
 			// res.send(jsonData)
-			res.render('basketball/index', { players: jsonData, username, loggedIn })
+			res.render('basketball/index', { players: jsonData.data, username, loggedIn })
 		})
 		.catch(error => {
 			res.redirect(`/error?error=${error}`)
