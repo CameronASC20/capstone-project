@@ -1,0 +1,21 @@
+{% layout 'layout.liquid'%}
+{% block content %}
+<div>
+    <h2 class="display-6">Favorite Superheroes</h2>
+    <div class="row">
+        {% for superhero in superheroes %}
+        <div class="card" style="width: 18rem;">
+            <h5 class="card-header">{{ superhero.name }}</h5>
+            <div class="card-body">
+                <p class="card-text">
+                    <img src="{{ superhero.images }}"/>
+                </p>
+                <a href="/superheroapp/favorite/{{ superhero._id }}" class="btn btn-info">
+                    View {{ superhero.name }}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
