@@ -67,47 +67,19 @@ router.get('/favorite/:id', (req, res) => {
 		})
 })
 
-// create -> POST route that favorites the superhero and renders the show page
+// create -> POST route that favorites the player and renders the show page
 router.post('/favorite/:id', (req, res) => {
 	req.body.ready = req.body.ready === 'on' ? true : false
 	// create form with type submit that has a value of favorite
 	// in that form use hidden inputs with values of the api info that I want to save
 	// that form info is available in req.body
 	req.body.owner = req.session.userId
-	req.body.powerstats = {
-		intelligence: req.body.intelligence,
-		strength: req.body.strength,
-		speed: req.body.speed,
-		durability: req.body.durability,
-		power: req.body.power,
-		combat: req.body.combat
-	}
-	req.body.appearance = {
-		gender: req.body.gender,
-		race: req.body.race,
-		height: req.body.height,
-		weight: req.body.weight,
-		eyeColor: req.body.eyeColor,
-		hairColor: req.body.hairColor
-	}
-	req.body.biography = {
-		fullName: req.body.fullName,
-		alterEgos: req.body.alterEgos,
-		aliases: req.body.aliases,
-		placeOfBirth: req.body.placeOfBirth,
-		firstAppearance: req.body.firstAppearance,
-		publisher: req.body.publisher,
-		alignment: req.body.alignment,
-	}
-	req.body.connections = {
-		groupAffiliation: req.body.groupAffiliation
-	}
 	console.log('req.body', req.body)
-	Superhero.create(req.body)
-	.then(superhero => {
-		console.log('this is the owner', superhero.owner.id)
-			console.log(superhero._id)
-			res.redirect(`/superheroapp/favorite/${superhero._id}`)
+	Basketball.create(req.body)
+	.then(basketball => {
+		console.log('this is the owner', basketball.owner.id)
+			console.log(player.id)
+			res.redirect(`/basketballapp/favorite/${player.id}`)
 		})
 		.catch(error => {
 			res.redirect(`/error?error=${error}`)
