@@ -3,7 +3,7 @@
 <div class="container-md">
     <article>
         <h2>
-            {{ player.first_name }} {{ player.last_name }}
+            {{ playerName.first }} {{ playerName.last }}
         </h2>
         <table class="table">
             <thead>
@@ -26,18 +26,18 @@
             <tbody>
               <tr>
                 <th scope="row">Regular Season</th>
-                <td>{{ player.fg_pct }}</td>
-                <td>{{ player.fg3_pct }}</td>
-                <td>{{ player.ft_pct }}</td>
-                <td>{{ player.reb }}</td>
-                <td>{{ player.oreb }}</td>
-                <td>{{ player.dreb }}</td>
-                <td>{{ player.ast }}</td>
-                <td>{{ player.blk }}</td>
-                <td>{{ player.stl }}</td>
-                <td>{{ player.pf }}</td>
-                <td>{{ player.turnover }}</td>
-                <td>{{ player.pts }}</td>
+                <td>{{ player.data[0].fg_pct }}</td>
+                <td>{{ player.data[0].fg3_pct }}</td>
+                <td>{{ player.data[0].ft_pct }}</td>
+                <td>{{ player.data[0].reb }}</td>
+                <td>{{ player.data[0].oreb }}</td>
+                <td>{{ player.data[0].dreb }}</td>
+                <td>{{ player.data[0].ast }}</td>
+                <td>{{ player.data[0].blk }}</td>
+                <td>{{ player.data[0].stl }}</td>
+                <td>{{ player.data[0].pf }}</td>
+                <td>{{ player.data[0].turnover }}</td>
+                <td>{{ player.data[0].pts }}</td>
               </tr>
             </tbody>
         </table>
@@ -45,19 +45,19 @@
         <div class="btn-group">
 
             
-            <form action="/basketball/favorite/{{ player.id }}" method="POST">
-                <input type="hidden" name="fg_pct" value="{{ player.fg_pct }}">
-                <input type="hidden" name="fg3_pct" value="{{ player.fg3_pct }}">
-                <input type="hidden" name="ft_pct" value="{{ player.ft_pct }}">
-                <input type="hidden" name="reb" value="{{ player.reb }}">
-                <input type="hidden" name="oreb" value="{{ player.oreb }}">
-                <input type="hidden" name="dreb" value="{{ player.dreb }}">
-                <input type="hidden" name="ast" value="{{ player.ast }}">
-                <input type="hidden" name="blk" value="{{ player.blk }}">
-                <input type="hidden" name="stl" value="{{ player.stl }}">
-                <input type="hidden" name="pf" value="{{ player.pf }}">
-                <input type="hidden" name="turnover" value="{{ player.turnover }}">
-                <input type="hidden" name="pts" value="{{ player.pts }}">
+            <form action="/basketballapp/favorite/{{ player.id }}" method="POST">
+                <input type="hidden" name="fg_pct" value="{{ player.data[0].fg_pct }}">
+                <input type="hidden" name="fg3_pct" value="{{ player.data[0].fg3_pct }}">
+                <input type="hidden" name="ft_pct" value="{{ player.data[0].ft_pct }}">
+                <input type="hidden" name="reb" value="{{ player.data[0].reb }}">
+                <input type="hidden" name="oreb" value="{{ player.data[0].oreb }}">
+                <input type="hidden" name="dreb" value="{{ player.data[0].dreb }}">
+                <input type="hidden" name="ast" value="{{ player.data[0].ast }}">
+                <input type="hidden" name="blk" value="{{ player.data[0].blk }}">
+                <input type="hidden" name="stl" value="{{ player.data[0].stl }}">
+                <input type="hidden" name="pf" value="{{ player.data[0].pf }}">
+                <input type="hidden" name="turnover" value="{{ player.data[0].turnover }}">
+                <input type="hidden" name="pts" value="{{ player.data[0].pts }}">
                 <input type="submit" value="Favorite" class="btn btn-danger">
             </form>
         </div>

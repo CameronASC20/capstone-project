@@ -11,9 +11,9 @@ const router = express.Router()
 // index ALL
 router.get('/', (req, res) => {
 	const { username, userId, loggedIn } = req.session
-	fetch('https://www.balldontlie.io/api/v1/players')
+	fetch('https://www.balldontlie.io/api/v1/players?page=300&per_page=11')
 		.then((responseData) => {
-			console.log(responseData)
+			console.log('response', responseData)
 			// return responseData
 			return responseData.json()
 			// res.send(responseData)
@@ -149,9 +149,9 @@ router.post('/:id', (req, res) => {
 	req.body.ready = req.body.ready === 'on' ? true : false
 	req.body.owner = req.session.userId
 	console.log('create route', req.body)
-	Superhero.create(req.body)
-		.then(superhero => {
-				res.redirect('/superheroapp/favorites')
+	Basketball.create(req.body)
+		.then(basketball => {
+				res.redirect('/basketballapp/favorites')
 		})
 		.catch(error => {
 				res.redirect(`/error?error=${error}`)
@@ -159,17 +159,21 @@ router.post('/:id', (req, res) => {
 	})
 	
 // show route -> index that shows the player selected and renders the show page
-router.get('/:id', (req, res) => {
+router.get('/:id/:playerFirst/:playerLast', (req, res) => {
 	console.log('PARAMS', req.params.id)
-	fetch(`https://www.balldontlie.io/api/v1/players/${req.params.id}`)
+	const playerFName = req.params.playerFirst
+	const playerLName = req.params.playerLast
+	console.log(playerFName)
+	fetch(`https://www.balldontlie.io/api/v1/season_averages?season=2020&player_ids[]=${req.params.id}`)
 		.then(jsonData => {
-			const basketball = jsonData.data.json()
-			console.log('DATA', basketball)
-		.then(basketball => {
-				console.log('LOOK AT THIS', basketball)
-				res.render('superhero/show', { basketball: basketball })
-			})
+			console.log('DATA', jsonData)
+			return jsonData.json()
 		})
+		.then(basketball => {
+				const playerName = { first: playerFName, last: playerLName}
+				console.log('LOOK AT THIS', basketball)
+				res.render('basketball/show', { player: basketball, playerName: playerName })
+			})
 		.catch(error => {
 			res.redirect(`/error?error=${error}`)
 		})
