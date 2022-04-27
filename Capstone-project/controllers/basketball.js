@@ -37,16 +37,16 @@ router.get('/new', (req, res) => {
 
 router.get('/favorites', (req, res) => {
 	const { username, userId, loggedIn } = req.session
-	Superhero.find({owner: userId})
-	.then(superheroes => {
-		res.render('superhero/favoriteindex', { superheroes, username, loggedIn })
+	Basketball.find({owner: userId})
+	.then(basketball => {
+		res.render('basketball/favoriteindex', { basketball, username, loggedIn })
 	})
 })
 
 // get route for favorite page
 router.get('/favorite/:id', (req, res) => {
-	const superId = req.params.id
-	Superhero.findById(superId)
+	const playerId = req.params.id
+	Basketball.findById(playerId)
 		.populate(
 			{path:'comments',
 			populate: {
@@ -54,15 +54,11 @@ router.get('/favorite/:id', (req, res) => {
 			}
 			})
 		
-		.then(superhero => {
-			console.log(superhero)
-			// console.log('powerstats', superhero.powerstats.intelligence)
-			// console.log('appearance', superhero.appearance)
-			// console.log('biography', superhero.biography)
-			// console.log('connections', superhero.connections)
-			console.log(superhero.comments)
+		.then(basketball => {
+			console.log(basketball)
+			console.log(basketball.comments)
 			const { username, userId, loggedIn } = req.session
-			res.render('superhero/favorite' , { superhero, userId, username, loggedIn })
+			res.render('basketball/favorite' , { basketball, userId, username, loggedIn })
 			// use this if console.log is not giving out full data
 			// res.send({ superhero })
 		})
@@ -162,15 +158,16 @@ router.post('/:id', (req, res) => {
 		})
 	})
 	
-// show route -> index that shows the superhero selected and renders the show page
+// show route -> index that shows the player selected and renders the show page
 router.get('/:id', (req, res) => {
 	console.log('PARAMS', req.params.id)
-	fetch(`https://akabab.github.io/superhero-api/api/id/${req.params.id}.json`)
+	fetch(`https://www.balldontlie.io/api/v1/players/${req.params.id}`)
 		.then(jsonData => {
-			const superhero = jsonData.json()
-		.then(superhero => {
-				console.log('LOOK AT THIS', superhero)
-				res.render('superhero/show', { superhero: superhero })
+			const basketball = jsonData.data.json()
+			console.log('DATA', basketball)
+		.then(basketball => {
+				console.log('LOOK AT THIS', basketball)
+				res.render('superhero/show', { basketball: basketball })
 			})
 		})
 		.catch(error => {

@@ -1,17 +1,19 @@
 {% layout 'layout.liquid'%}
 {% block content %}
 <div>
-    <h2 class="display-6">Favorite Superheroes</h2>
+    <h2 class="display-6">Favorite Players</h2>
     <div class="row">
-        {% for superhero in superheroes %}
+        {% for player in players %}
         <div class="card" style="width: 18rem;">
-            <h5 class="card-header">{{ superhero.name }}</h5>
+            <h5 class="card-header">{{ player.first_name }} {{ player.last_name }}</h5>
             <div class="card-body">
                 <p class="card-text">
-                    <img src="{{ superhero.images }}"/>
+                    Team: {{ player.team.full_name }}
+                    
+                    Conference: {{ player.team.conference }}
                 </p>
-                <a href="/superheroapp/favorite/{{ superhero._id }}" class="btn btn-info">
-                    View {{ superhero.name }}
+                <a href="/basketball/favorite/{{ player.id }}" class="btn btn-info">
+                    View {{ player.first_name }} {{ player.last_name }}
                 </a>
             </div>
         </div>

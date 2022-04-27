@@ -3,66 +3,61 @@
 <div class="container-md">
     <article>
         <h2>
-            {{ superhero.name }}
+            {{ player.first_name }} {{ player.last_name }}
         </h2>
-        <img src="{{ superhero.images.md }}"/>
-        <h3>Powerstats</h3>
-             <ul class="ul">
-               <li>Intelligence: {{ superhero.powerstats.intelligence }}</li> 
-               <li>Strength: {{ superhero.powerstats.strength}}</li>
-               <li>Speed: {{ superhero.powerstats.speed }}</li>
-               <li>Durability: {{ superhero.powerstats.durability }}</li>
-               <li>Power: {{ superhero.powerstats.power }}</li>
-               <li>Combat: {{ superhero.powerstats.combat }}</li>
-             </ul>
-        <h3>Appearance</h3>
-            <ul class="ul">
-                <li>Gender: {{ superhero.appearance.gender }}</li>
-                <li>Race: {{ superhero.appearance.race }}</li>
-                <li>Height: {{ superhero.appearance.height[0] }}</li>
-                <li>Weight: {{ superhero.appearance.weight[0] }}</li>
-                <li>Eye Color: {{ superhero.appearance.eyeColor }}</li>
-                <li>Hair Color: {{ superhero.appearance.hairColor }}</li>
-            </ul>
-        <h3>Biography</h3>
-            <ul class="ul">
-                <li>Full Name: {{ superhero.biography.fullName }}</li>
-                <li>Alter Egos: {{ superhero.biography.alterEgos }}</li>
-                <li>Aliases: {{ superhero.biography.aliases }}</li>
-                <li>Place of birth: {{ superhero.biography.placeOfBirth }}</li>
-                <li>First Appearance: {{ superhero.biography.firstAppearance }}</li>
-                <li>Publisher: {{ superhero.biography.publisher }}</li>
-                <li>Alignment: {{ superhero.biography.alignment }}</li>
-            </ul>
-        <h3>Connections</h3>
-            <p>{{ superhero.connections.groupAffiliation }}</p>
-        {% if superhero.owner == userId %}
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Stats</th>
+                <th scope="col">FG%</th>
+                <th scope="col">3P%</th>
+                <th scope="col">FT%</th>
+                <th scope="col">REB</th>
+                <th scope="col">OREB</th>
+                <th scope="col">DREB</th>
+                <th scope="col">AST</th>
+                <th scope="col">BLK</th>
+                <th scope="col">STL</th>
+                <th scope="col">PF</th>
+                <th scope="col">TO</th>
+                <th scope="col">PTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Regular Season</th>
+                <td>{{ player.fg_pct }}</td>
+                <td>{{ player.fg3_pct }}</td>
+                <td>{{ player.ft_pct }}</td>
+                <td>{{ player.reb }}</td>
+                <td>{{ player.oreb }}</td>
+                <td>{{ player.dreb }}</td>
+                <td>{{ player.ast }}</td>
+                <td>{{ player.blk }}</td>
+                <td>{{ player.stl }}</td>
+                <td>{{ player.pf }}</td>
+                <td>{{ player.turnover }}</td>
+                <td>{{ player.pts }}</td>
+              </tr>
+            </tbody>
+        </table>
+        {% if player.owner == userId %}
         <div class="btn-group">
 
             
-            <form action="/superheroapp/favorite/{{ superhero.id }}" method="POST">
-                <input type="hidden" name="images" value="{{ superhero.images.md }}">
-                <input type="hidden" name="name" value="{{ superhero.name }}">
-                <input type="hidden" name="gender" value="{{ superhero.appearance.gender }}">
-                <input type="hidden" name="race" value="{{ superhero.appearance.race }}">
-                <input type="hidden" name="height" value="{{ superhero.appearance.height[0] }}">
-                <input type="hidden" name="weight" value="{{ superhero.appearance.weight[0] }}">
-                <input type="hidden" name="eyeColor" value="{{ superhero.appearance.eyeColor }}">
-                <input type="hidden" name="hairColor" value="{{ superhero.appearance.hairColor }}">
-                <input type="hidden" name="intelligence" value="{{ superhero.powerstats.intelligence }}">
-                <input type="hidden" name="strength" value="{{ superhero.powerstats.strength }}">
-                <input type="hidden" name="speed" value="{{ superhero.powerstats.speed }}">
-                <input type="hidden" name="durability" value="{{ superhero.powerstats.durability }}">
-                <input type="hidden" name="power" value="{{ superhero.powerstats.power }}">
-                <input type="hidden" name="combat" value="{{ superhero.powerstats.combat }}">
-                <input type="hidden" name="fullName" value="{{ superhero.biography.fullName }}">
-                <input type="hidden" name="alterEgos" value="{{ superhero.biography.alterEgos }}">
-                <input type="hidden" name="aliases" value="{{ superhero.biography.aliases }}">
-                <input type="hidden" name="placeOfBirth" value="{{ superhero.biography.placeOfBirth }}">
-                <input type="hidden" name="firstAppearance" value="{{ superhero.biography.firstAppearance }}">
-                <input type="hidden" name="publisher" value="{{ superhero.biography.publisher }}">
-                <input type="hidden" name="alignment" value="{{ superhero.biography.alignment }}">
-                <input type="hidden" name="groupAffiliation" value="{{ superhero.connections.groupAffiliation }}">
+            <form action="/basketball/favorite/{{ player.id }}" method="POST">
+                <input type="hidden" name="fg_pct" value="{{ player.fg_pct }}">
+                <input type="hidden" name="fg3_pct" value="{{ player.fg3_pct }}">
+                <input type="hidden" name="ft_pct" value="{{ player.ft_pct }}">
+                <input type="hidden" name="reb" value="{{ player.reb }}">
+                <input type="hidden" name="oreb" value="{{ player.oreb }}">
+                <input type="hidden" name="dreb" value="{{ player.dreb }}">
+                <input type="hidden" name="ast" value="{{ player.ast }}">
+                <input type="hidden" name="blk" value="{{ player.blk }}">
+                <input type="hidden" name="stl" value="{{ player.stl }}">
+                <input type="hidden" name="pf" value="{{ player.pf }}">
+                <input type="hidden" name="turnover" value="{{ player.turnover }}">
+                <input type="hidden" name="pts" value="{{ player.pts }}">
                 <input type="submit" value="Favorite" class="btn btn-danger">
             </form>
         </div>
