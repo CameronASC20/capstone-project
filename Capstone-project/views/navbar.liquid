@@ -3,16 +3,15 @@
     <div class="container-fluid">
         <a href="/" class="navbar-brand">Basketballapp</a>
         {% if loggedIn %}
-        <a href="/baskteball" class="nav-link text-light">Hello {{ username }} </a>
+        <a href="/basketballapp" class="nav-link text-light">Hello {{ username }} </a>
         {% endif %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             {% if loggedIn %}
-                <a href="/baskteball/index" class="nav-link text-light">View All</a>
-                <a href="/baskteball/new" class="nav-link text-light">New</a>
-                <a href="/baskteball/favorites" class="nav-link text-light">Favorites</a>
+                <a href="/basketballapp" class="nav-link text-light">View All</a>
+                <a href="/basketballapp/favorites" class="nav-link text-light">Favorites</a>
                 <a href="/auth/logout" class="nav-link text-light">Log Out</a>
             {% else %}
                 <a href="/auth/signup" class="nav-link text-light">Sign Up</a>

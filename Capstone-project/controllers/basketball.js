@@ -11,7 +11,7 @@ const router = express.Router()
 // index ALL
 router.get('/', (req, res) => {
 	const { username, userId, loggedIn } = req.session
-	fetch('https://www.balldontlie.io/api/v1/players?page=300&per_page=11')
+	fetch('https://www.balldontlie.io/api/v1/players?page=301&per_page=11')
 		.then((responseData) => {
 			console.log('response', responseData)
 			// return responseData
@@ -29,23 +29,19 @@ router.get('/', (req, res) => {
 })
 
 
-// new route -> GET route that renders our page with the form
-router.get('/new', (req, res) => {
-	const { username, userId, loggedIn } = req.session
-	res.render('superhero/new', { username, loggedIn })
-})
-
 router.get('/favorites', (req, res) => {
 	const { username, userId, loggedIn } = req.session
 	Basketball.find({owner: userId})
-	.then(basketball => {
-		res.render('basketball/favoriteindex', { basketball, username, loggedIn })
+	.then(players => {
+		res.render('basketball/favoriteindex', { players, username, loggedIn })
 	})
 })
 
-// get route for favorite page
-router.get('/favorite/:id', (req, res) => {
+// get route for favorite show page
+router.get('/favorite/:id:/playerFirst/:playerLast', (req, res) => {
 	const playerId = req.params.id
+	const playerFName = req.params.playerFirst
+	const playerLName = req.params.playerLast
 	Basketball.findById(playerId)
 		.populate(
 			{path:'comments',
@@ -57,10 +53,9 @@ router.get('/favorite/:id', (req, res) => {
 		.then(basketball => {
 			console.log(basketball)
 			console.log(basketball.comments)
+			const playerName = { first: playerFName, last: playerLName}
 			const { username, userId, loggedIn } = req.session
-			res.render('basketball/favorite' , { basketball, userId, username, loggedIn })
-			// use this if console.log is not giving out full data
-			// res.send({ superhero })
+			res.render('basketball/favorite' , { basketball, userId, username, loggedIn, playerName: playerName })
 		})
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)
@@ -76,8 +71,8 @@ router.post('/favorite/:id', (req, res) => {
 	req.body.owner = req.session.userId
 	console.log('req.body', req.body)
 	Basketball.create(req.body)
-	.then(basketball => {
-		console.log('this is the owner', basketball.owner.id)
+	.then(player => {
+		console.log('this is the owner', player.owner.id)
 			console.log(player.id)
 			res.redirect(`/basketballapp/favorite/${player.id}`)
 		})
@@ -89,11 +84,11 @@ router.post('/favorite/:id', (req, res) => {
 
 // update route
 router.put('/:id/edit', (req, res) => {
-	const superId = req.params.id
-	Superhero.findByIdAndUpdate(superId, req.body, { new: true })
-	.then(superhero => {
-			console.log('the updated superhero', superhero)
-			res.redirect(`/superheroapp/favorite/${superhero._id}`)
+	const playerId = req.params.id
+	Basketball.findByIdAndUpdate(playerId, req.body, { new: true })
+	.then(player => {
+			console.log('the updated player', player)
+			res.redirect(`/basketballapp/favorite/${player.id}`)
 		})
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)
@@ -103,12 +98,12 @@ router.put('/:id/edit', (req, res) => {
 // edit route -> GET that takes us to the edit form view
 router.get('/:id/edit', (req, res) => {
 	// we need to get the id
-	const superId = req.params.id
-	Superhero.findById(superId)
-	.then(superhero => {
+	const playerId = req.params.id
+	Basketball.findById(playerId)
+	.then(basketball => {
 		const username = req.session.username
 		const loggedIn = req.session.loggedIn
-		res.render('superhero/edit', { superhero, username, loggedIn})
+		res.render('basketball/edit', { basketball, username, loggedIn})
 	})
 	.catch((error) => {
 		res.redirect(`/error?error=${error}`)
@@ -116,7 +111,7 @@ router.get('/:id/edit', (req, res) => {
 })
 	
 	
-// create -> POST route that creates a new superhero
+// create -> POST route that redirects to favorites index page
 router.post('/:id', (req, res) => {
 	req.body.ready = req.body.ready === 'on' ? true : false
 	req.body.owner = req.session.userId
@@ -154,9 +149,9 @@ router.get('/:id/:playerFirst/:playerLast', (req, res) => {
 	
 // delete route
 router.delete('/:id', (req, res) => {
-	Superhero.findByIdAndDelete(req.params.id)
+	Basketball.findByIdAndDelete(req.params.id)
 		.then(
-			res.redirect(`/superheroapp/favorites`)
+			res.redirect(`/basketballapp/favorites`)
 		)
 		.catch(error => {
 			res.redirect(`/error?error=${error}`)

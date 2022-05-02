@@ -1,158 +1,95 @@
 {% layout 'layout.liquid' %}
 {% block content %}
 <div class="container-sm">
-    <form action="/superheroapp/{{ superhero._id }}/edit?_method=PUT" method="POST">
+    <form action="/basketballapp/{{ player.id }}/edit?_method=PUT" method="POST">
         <fieldset>
-            <legend>Edit Superhero</legend>
-            <label class="form-label">Name: </label>
-            <input 
-                type="text" 
-                name="name" 
-                placeholder="{{ superhero.name }}"
-                value="{{ superhero.name }}"
-                class="form-control"
-            >
-            <label class="form-label">Intelligence: </label>
+            <legend>Edit Player Stats</legend>
+            <label class="form-label">FG%: </label>
             <input 
                 type="number" 
-                name="intelligence" 
-                value="{{ superhero.powerstats.intelligence }}" 
+                name="fg%" 
+                value="{{ player.data[0].fg_pct }}"
                 class="form-control"
             >
-            <label class="form-label">Strength: </label>
+            <label class="form-label">3P%: </label>
             <input 
                 type="number" 
-                name="strength"
-                value="{{ superhero.powerstats.strength }}"
+                name="3p%" 
+                value="{{ player.data[0].fg3_pct }}" 
                 class="form-control"
             >
-            <label class="form-label">Speed: </label>
+            <label class="form-label">FT%: </label>
             <input 
                 type="number" 
-                name="speed"
-                value="{{ superhero.powerstats.speed }}"
+                name="ft%"
+                value="{{ player.data[0].ft_pct }}"
                 class="form-control"
             >
-            <label class="form-label">Durability: </label>
+            <label class="form-label">REB: </label>
             <input 
                 type="number" 
-                name="durability"
-                value="{{ superhero.powerstats.durability }}"
+                name="reb"
+                value="{{ player.data[0].reb }}"
                 class="form-control"
             >
-            <label class="form-label">Power: </label>
+            <label class="form-label">OREB: </label>
             <input 
                 type="number" 
-                name="power"
-                value="{{ superhero.powerstats.power }}"
+                name="oreb"
+                value="{{ player.data[0].oreb }}"
                 class="form-control"
             >
-            <label class="form-label">Combat: </label>
+            <label class="form-label">DREB: </label>
             <input 
                 type="number" 
-                name="combat"
-                value="{{ superhero.powerstats.combat }}"
+                name="dreb"
+                value="{{ player.data[0].dreb }}"
                 class="form-control"
             >
-            <label class="form-label">Gender: </label>
+            <label class="form-label">AST: </label>
             <input 
-                type="text" 
-                name="gender"
-                value="{{ superhero.appearance.gender }}"
+                type="number" 
+                name="ast"
+                value="{{ player.data[0].ast }}"
                 class="form-control"
             >
-            <label class="form-label">Race: </label>
+            <label class="form-label">BLK: </label>
             <input 
-                type="text" 
-                name="race"
-                value="{{ superhero.appearance.race }}"
+                type="number" 
+                name="blk"
+                value="{{ player.data[0].blk }}"
                 class="form-control"
             >
-            <label class="form-label">Height: </label>
+            <label class="form-label">STL: </label>
             <input 
-                type="text" 
-                name="height"
-                value="{{ superhero.appearance.height }}"
+                type="number" 
+                name="stl"
+                value="{{ player.data[0].stl }}"
                 class="form-control"
             >
-            <label class="form-label">Weight: </label>
+            <label class="form-label">PF: </label>
             <input 
-                type="text" 
-                name="weight"
-                value="{{ superhero.appearance.weight }}"
+                type="number" 
+                name="pf"
+                value="{{ player.data[0].pf }}"
                 class="form-control"
             >
-            <label class="form-label">Eye color: </label>
+            <label class="form-label">TO: </label>
             <input 
-                type="text" 
-                name="eye color"
-                value="{{ superhero.appearance.eyeColor }}"
+                type="number" 
+                name="to"
+                value="{{ player.data[0].turnover }}"
                 class="form-control"
             >
-            <label class="form-label">Hair color: </label>
+            <label class="form-label">PTS: </label>
             <input 
-                type="text" 
-                name="hair color"
-                value="{{ superhero.appearance.hairColor }}"
-                class="form-control"
-            >
-            <label class="form-label">Full name: </label>
-            <input 
-                type="text" 
-                name="full name"
-                value="{{ superhero.biography.fullName }}"
-                class="form-control"
-            >
-            <label class="form-label">Alter egos: </label>
-            <input 
-                type="text" 
-                name="alter egos"
-                value="{{ superhero.biography.alterEgos }}"
-                class="form-control"
-            ><label class="form-label">Aliases: </label>
-            <input 
-                type="text" 
-                name="aliases"
-                value="{{ superhero.biography.aliases }}"
-                class="form-control"
-            >
-            <label class="form-label">Place of birth: </label>
-            <input 
-                type="text" 
-                name="place of birth"
-                value="{{ superhero.biography.placeOfBirth }}"
-                class="form-control"
-            >
-            <label class="form-label">First appearance: </label>
-            <input 
-                type="text" 
-                name="first appearance"
-                value="{{ superhero.biography.firstAppearance }}"
-                class="form-control"
-            >
-            <label class="form-label">Publisher: </label>
-            <input 
-                type="text" 
-                name="publisher"
-                value="{{ superhero.biography.publisher }}"
-                class="form-control"
-            >
-            <label class="form-label">Alignment: </label>
-            <input 
-                type="text" 
-                name="alignment"
-                value="{{ superhero.biography.alignment }}"
-                class="form-control"
-            >
-            <label class="form-label">Connections: </label>
-            <input 
-                type="text" 
-                name="connections"
-                value="{{ superhero.connections.groupAffiliation }}"
+                type="number" 
+                name="pts"
+                value="{{ player.data[0].pts }}"
                 class="form-control"
             >
         </fieldset>
-        <input type="submit" value="Edit Superhero" class="btn btn-success">
+        <input type="submit" value="Edit Player Stats" class="btn btn-success">
     </form>
 </div>
 {% endblock %}

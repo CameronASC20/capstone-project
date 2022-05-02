@@ -18,8 +18,8 @@ const router = express.Router()
 ////////////////////////////////////////////
 // only need two routes for comments right now
 // POST -> to create a comment
-router.post('/:superId', (req, res) => {
-    const superId = req.params.superId
+router.post('/:playerId', (req, res) => {
+    const playerId = req.params.superId
     console.log('first comment body', req.body)
     
     // we'll adjust req.body to include an author
@@ -30,22 +30,22 @@ router.post('/:superId', (req, res) => {
     Comment.create({
         title: req.body.title,
         body: req.body.body,
-        superhero: superId,
+        player: playerId,
         author: req.body.author
     })
     .then(comment => {
         console.log(comment)
-        Superhero.findById(superId)
-        .then(superhero => {
+        Basketball.findById(playerId)
+        .then(player => {
             // then we'll send req.body to the comments array
-            superhero.comments.push(comment._id)
+            player.comments.push(comment._id)
             // save the superhero
-            return superhero.save()
+            return player.save()
         })
-        .then(superhero => {
+        .then(player => {
             // redirect
-            console.log(superhero)
-            res.redirect(`/superheroapp/favorite/${superhero._id}`)
+            console.log(player)
+            res.redirect(`/basketballapp/favorite/${player.id}`)
         })
     })
         // or show an error if we have one
@@ -59,35 +59,35 @@ router.post('/:superId', (req, res) => {
 // we'll use two params to make our life easier
 // first the id of the superhero, since we need to find it
 // then the id of the comment, since we want to delete it
-router.delete('/delete/:fruitId/:commId', (req, res) => {
-    // first we want to parse out our ids
-    const superId = req.params.superId
-    const commId = req.params.commId
-    // then we'll find the superhero
-    Fruit.findById(superId)
-        .then(superhero => {
-            const theComment = superhero.comments.id(commId)
-            // only delete the comment if the user who is logged in is the comment's author
-            if ( theComment.author == req.session.userId) {
-                // then we'll delete the comment
-                theComment.remove()
-                // return the saved superhero
-                return superhero.save()
-            } else {
-                return
-            }
+// router.delete('/delete/:fruitId/:commId', (req, res) => {
+//     // first we want to parse out our ids
+//     const superId = req.params.superId
+//     const commId = req.params.commId
+//     // then we'll find the superhero
+//     Fruit.findById(superId)
+//         .then(superhero => {
+//             const theComment = superhero.comments.id(commId)
+//             // only delete the comment if the user who is logged in is the comment's author
+//             if ( theComment.author == req.session.userId) {
+//                 // then we'll delete the comment
+//                 theComment.remove()
+//                 // return the saved superhero
+//                 return superhero.save()
+//             } else {
+//                 return
+//             }
 
-        })
-        .then(superhero => {
-            // redirect to the superhero show page
-            res.redirect(`/superheroapp/${superId}`)
-        })
-        .catch(error => {
-            // catch any errors
-            console.log(error)
-            res.send(error)
-        })
-})
+//         })
+//         .then(superhero => {
+//             // redirect to the superhero show page
+//             res.redirect(`/superheroapp/${superId}`)
+//         })
+//         .catch(error => {
+//             // catch any errors
+//             console.log(error)
+//             res.send(error)
+//         })
+// })
 
 ////////////////////////////////////////////
 // Export the Router
